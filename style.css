@@ -330,3 +330,40 @@ form button:active{
   color: rgba(3, 2, 2, 0.301);
 }
 /* ===end-button=== */
+/* ===========social media============ */
+
+
+a, a:hover {
+	text-decoration: none;
+}
+
+.socialbtns, .socialbtns ul, .socialbtns li {
+  margin: 0;
+  padding: 5px;
+}
+
+.socialbtns li {
+    list-style: none outside none;
+    display: inline-block;
+}
+
+.socialbtns .fa {
+	width: 40px;
+    height: 28px;
+	color: #000;
+	background-color: rgba(245, 146, 17, 0.712);
+	border: 1px solid #000;
+	padding-top: 12px;
+	border-radius: 22px;
+	-moz-border-radius: 22px;
+	-webkit-border-radius: 22px;
+	-o-border-radius: 22px;
+}
+
+.socialbtns .fa:hover {
+	color: #FFF;
+	background-color: rgb(7, 90, 110);
+	border: 1px solid #000;
+}
+
+/* ===========end social media============ */
