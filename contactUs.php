@@ -67,7 +67,7 @@
                       <input class="InputText"type="submit" name="submit" value="Send Email">
                   </form>
                   <br><br>
-                  <?php echo $msg; ?>
+                  <?php echo $msg;?>
                 </div>
 
                   
