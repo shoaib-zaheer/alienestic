@@ -1,44 +1,87 @@
-<?php
-$target_dir = "uploads/";
-$target_file = $target_dir .uniqid('', true).basename($_FILES["file"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+<!DOCTYPE html>
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["file"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image. ";
-    $uploadOk = 0;
-  }
+<html>
+    <head><title>How to send attachment in an email on form submission using PHP</title></head>
+    <body>        
+        <!-- Display submission status -->
+<?php if(!empty($statusMsg)){ ?>
+    <p><?php echo $statusMsg; ?></p>
+<?php } ?>
+    
+<?php
+$statusMsg='';
+if(isset($_FILES["file"]["name"])){
+   $email = $_POST['email'];
+    $name = $_POST['name'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+$fromemail =  $email;
+$subject="Uploaded file attachment";
+$email_message = '<h2>Contact Request Submitted</h2>
+                    <p><b>Name:</b> '.$name.'</p>
+                    <p><b>Email:</b> '.$email.'</p>
+                    <p><b>Subject:</b> '.$subject.'</p>
+                    <p><b>Message:</b><br/>'.$message.'</p>';
+$email_message.="Please find the attachment";
+$semi_rand = md5(uniqid(time()));
+$headers = "From: ".$fromemail;
+$mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
+ 
+    $headers .= "\nMIME-Version: 1.0\n" .
+    "Content-Type: multipart/mixed;\n" .
+    " boundary=\"{$mime_boundary}\"";
+ 
+if($_FILES["file"]["name"]!= ""){  
+	$strFilesName = $_FILES["file"]["name"];  
+	$strContent = chunk_split(base64_encode(file_get_contents($_FILES["file"]["tmp_name"])));  
+	
+	
+    $email_message .= "This is a multi-part message in MIME format.\n\n" .
+    "--{$mime_boundary}\n" .
+    "Content-Type:text/html; charset=\"iso-8859-1\"\n" .
+    "Content-Transfer-Encoding: 7bit\n\n" .
+    $email_message .= "\n\n";
+ 
+ 
+    $email_message .= "--{$mime_boundary}\n" .
+    "Content-Type: application/octet-stream;\n" .
+    " name=\"{$strFilesName}\"\n" .
+    //"Content-Disposition: attachment;\n" .
+    //" filename=\"{$fileatt_name}\"\n" .
+    "Content-Transfer-Encoding: base64\n\n" .
+    $strContent  .= "\n\n" .
+    "--{$mime_boundary}--\n";
 }
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists. ";
-  $uploadOk = 0;
+$toemail="aliensfrommars1@gmail.com";	
+ 
+if(mail($toemail, $subject, $email_message, $headers)){
+   $statusMsg= "Email send successfully with attachment";
+}else{
+   $statusMsg= "Not sent";
 }
-// Check file size
-if ($_FILES["file"]["size"] > 500000) {
-  echo "Sorry, your file is too large. ";
-  $uploadOk = 0;
 }
-// Allow certain file formats
-if($imageFileType != "pdf" && $imageFileType != "PDF" ) {
-  echo "Sorry, only PDF files are allowed. ";
-  $uploadOk = 0;
-}
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded. ";
-// if everything is ok, try to upload file
-} else {
-  if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-    echo "The file ".htmlspecialchars( basename( $_FILES["file"]["name"])). " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file. ";
-  }
-}
-?>
+   ?>
+<!-- Display contact form -->
+<form method="post" action="" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="text" name="name" class="form-control"  placeholder="Name" required="">
+    </div>
+    <div class="form-group">
+        <input type="email" name="email" class="form-control"  placeholder="Email address" required="">
+    </div>
+    <div class="form-group">
+        <input type="text" name="subject" class="form-control"  placeholder="Subject" required="">
+    </div>
+    <div class="form-group">
+        <textarea name="message" class="form-control" placeholder="Write your message here" required=""></textarea>
+    </div>
+    <div class="form-group">
+        <input type="file" name="file" class="form-control">
+    </div>
+    <div class="submit">
+        <input type="submit" name="submit" class="btn" value="SEND MESSAGE">
+    </div>
+</form>
+ 
+</body>
+</html>
