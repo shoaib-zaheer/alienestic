@@ -1,4 +1,4 @@
-const density ="◙◙◙◙○○○○       ••••◘◘◘◘.....     ";
+const density ="◙◙◙◙○○○○  ••••◘◘◘◘.....";
 
 let video;
 let vPlay = false;
@@ -8,7 +8,7 @@ let button;
 function setup() {
   noCanvas();
   video = createCapture(VIDEO);
-  video.size(64, 48);
+  video.size(200, 70);
   asciiDiv = createDiv();
   video.hide();
   button = createButton("Play Video");

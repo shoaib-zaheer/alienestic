@@ -303,7 +303,7 @@ form button:active{
 } */
 /* ===button=== */
 .btn {
-  background-color: rgba(84, 104, 109, 0.884);
+  background-color: rgba(42, 51, 54, 0.884);
   border: none;
   color: rgb(153, 153, 153);
   padding: 4px 4px;
