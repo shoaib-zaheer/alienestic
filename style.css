@@ -200,9 +200,21 @@ h1 {
   display: cover;
 }
 .strong-text{
-  font-weight: bolder;
-  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 21px;
 }
+
+p{
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 20px;
+  /* font-weight: lighter; */
+  margin-left: 50px;
+  margin-right: 50px;
+  line-height: 1.6;
+}
+
 /* ========poster-section========== */
 
 #nav1 {
