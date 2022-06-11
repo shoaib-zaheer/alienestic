@@ -14,7 +14,6 @@ function setup() {
   button = createButton("Play Video");
   button.mousePressed(toggleVideo);
 }
-
 function toggleVideo(){
     if (vPlay){
         video.pause();
