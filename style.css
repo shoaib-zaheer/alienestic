@@ -199,17 +199,18 @@ h1 {
   max-height: fit-content;
   display: cover;
 }
-.strong-text{
+h2,.strong-text{
   font-family: sans-serif;
   font-weight: bold;
-  font-size: 21px;
-}
-
-p{
-  text-align: justify;
-  text-justify: inter-word;
   font-size: 20px;
   /* font-weight: lighter; */
+}
+
+h2, .infotext{
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 19px;
+  font-weight: lighter;
   margin-left: 50px;
   margin-right: 50px;
   line-height: 1.6;
