@@ -8,7 +8,7 @@ let button;
 function setup() {
   noCanvas();
   video = createCapture(VIDEO);
-  video.size(200, 70);
+  video.size(300, 170);
   asciiDiv = createDiv();
   video.hide();
   button = createButton("Play Video");
